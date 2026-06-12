@@ -2389,7 +2389,7 @@ static void te13x_handle_interrupt(struct wcxb *xb, u32 pending)
 
 static void te13xp_timer(TIMER_DATA_TYPE timer)
 {
-	struct t13x *wc = from_timer(wc, timer, timer);
+	struct t13x *wc = timer_container_of(wc, timer, timer);
 
 	if (unlikely(!test_bit(INITIALIZED, &wc->bit_flags)))
 		return;

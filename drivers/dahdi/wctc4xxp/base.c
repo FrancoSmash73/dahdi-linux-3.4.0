@@ -3654,7 +3654,7 @@ wctc4xxp_send_commands(struct wcdte *wc, struct list_head *to_send)
 static void
 wctc4xxp_watchdog(TIMER_DATA_TYPE timer)
 {
-	struct wcdte *wc = from_timer(wc, timer, watchdog);
+	struct wcdte *wc = timer_container_of(wc, timer, watchdog);
 	struct tcb *cmd, *temp;
 	LIST_HEAD(cmds_to_retry);
 	const int MAX_RETRIES = 5;

@@ -352,7 +352,7 @@ static void xpp_set_syncer(xbus_t *xbus, bool on)
 
 static void xbus_command_timer(TIMER_DATA_TYPE timer)
 {
-	xbus_t *xbus = from_timer(xbus, timer, command_timer);
+	xbus_t *xbus = timer_container_of(xbus, timer, command_timer);
 
 	BUG_ON(!xbus);
 	xbus_command_queue_tick(xbus);

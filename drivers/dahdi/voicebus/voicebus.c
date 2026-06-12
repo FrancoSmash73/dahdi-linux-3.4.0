@@ -1733,7 +1733,7 @@ static void
 vb_timer(TIMER_DATA_TYPE timer)
 {
 	unsigned long start = jiffies;
-	struct voicebus *vb = from_timer(vb, timer, timer);
+	struct voicebus *vb = timer_container_of(vb, timer, timer);
 	vb_isr(0, vb);
 	if (!test_bit(VOICEBUS_STOPPED, &vb->flags)) {
 		mod_timer(&vb->timer, start + HZ/1000);

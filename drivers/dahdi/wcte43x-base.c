@@ -3178,7 +3178,7 @@ static void t43x_handle_interrupt(struct wcxb *xb, u32 pending)
 
 static void t43x_timer(TIMER_DATA_TYPE timer)
 {
-	struct t43x *wc = from_timer(wc, timer, timer);
+	struct t43x *wc = timer_container_of(wc, timer, timer);
 
 	if (!is_initialized(wc))
 		return;

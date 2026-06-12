@@ -2780,7 +2780,7 @@ static void vpm_check_func(struct work_struct *work)
 static void te12xp_timer(TIMER_DATA_TYPE timer)
 {
 	unsigned long flags;
-	struct t1 *wc = from_timer(wc, timer, timer);
+	struct t1 *wc = timer_container_of(wc, timer, timer);
 
 	if (unlikely(!test_bit(INITIALIZED, &wc->bit_flags)))
 		return;
