@@ -1471,6 +1471,15 @@ timer_setup(struct timer_list *timer,
 
 #endif
 
+/* Linux 6.16 renamed from_timer() to timer_container_of() (RHEL 10's 6.12
+ * kernel carries the backport). Older kernels, e.g. RHEL/Rocky 8's 4.18,
+ * only have from_timer(), so map the new name onto it there. */
+#include <linux/timer.h>
+#ifndef timer_container_of
+#define timer_container_of(var, callback_timer, timer_fieldname) \
+	from_timer(var, callback_timer, timer_fieldname)
+#endif
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 11, 0)
 #define refcount_read atomic_read
 
